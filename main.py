@@ -49,7 +49,7 @@ browser = webdriver.Firefox()
 waiter = WebDriverWait(browser, 30)
 
 browser.get('https://cis.ncu.edu.tw/HumanSys/')
-print('open %s' % browser.title)
+print('open %s' % browser.title.encode('utf-8'))
 
 # check if logined or not
 if not check_login(browser):
