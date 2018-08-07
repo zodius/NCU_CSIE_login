@@ -1,8 +1,11 @@
-#!/home/zodius/.virtualenvs/ctf2/bin/python
-import config
 import requests as req
 from bs4 import BeautifulSoup
 import sys
+
+username = ''
+password = ''
+ParttimeUsuallyId = '' # can be found in login screen
+
 
 def login():
 	s = req.session()
@@ -12,11 +15,11 @@ def login():
 
 	res = s.get(url, allow_redirects=True)
 
-	res = s.post(login, data={"j_username":config.user, "j_password":config.passwd})
+	res = s.post(login, data={"j_username":username, "j_password":password})
 	return s
 
 def sign(s):
-	work = 'https://cis.ncu.edu.tw/HumanSys/student/stdSignIn/create?ParttimeUsuallyId=66103'
+	work = 'https://cis.ncu.edu.tw/HumanSys/student/stdSignIn/create?ParttimeUsuallyId=$d' % ParttimeUsuallyId
 	
 	res = s.get(work)
 	soup = BeautifulSoup(res.text, 'html.parser')
